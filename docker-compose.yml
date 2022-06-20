@@ -1,0 +1,40 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  redis:
+    image: "redis:latest"
+  api:
+    image: "${DOCKER_USERNAME}/multi-server:latest"
+    environment:
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      PGUSER: ${PGUSER}
+      PGHOST: ${PGHOST}
+      PGDATABASE: ${PGDATABASE}
+      PGPASSWORD: ${PGPASSWORD}
+      PGPORT: ${PGPORT}
+    depends_on:
+      - redis
+      - postgres
+  client:
+    image: "${DOCKER_USERNAME}/multi-client:latest"
+    environment:
+      - WDS_SOCKET_PORT=0
+  worker:
+    image: "${DOCKER_USERNAME}/multi-worker:latest"
+    environment:
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+    depends_on:
+      - redis
+  nginx:
+    restart: always
+    image: "${DOCKER_USERNAME}/multi-nginx:latest"
+    ports:
+      - "3080:80"
+    depends_on:
+      - api
+      - client
