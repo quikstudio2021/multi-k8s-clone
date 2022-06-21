@@ -1,6 +1,6 @@
-export CLIENT_IMAGE="$CLIENT_IMAGE"
-export SERVER_IMAGE="$SERVER_IMAGE"
-export WORKER_IMAGE="$WORKER_IMAGE"
+export CLIENT_IMAGE="$DOCKER_USERNAME/multi-client"
+export SERVER_IMAGE="$DOCKER_USERNAME/multi-server"
+export WORKER_IMAGE="$DOCKER_USERNAME/multi-worker"
 docker build -t $CLIENT_IMAGE:latest -t $CLIENT_IMAGE:$SHA -f ./client/Dockerfile ./client
 docker build -t $SERVER_IMAGE:latest -t $SERVER_IMAGE:$SHA -f ./server/Dockerfile ./server
 docker build -t $WORKER_IMAGE:latest -t $WORKER_IMAGE:$SHA -f ./worker/Dockerfile ./worker
