@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "multi-k8s-frontend.quik-studio-com-tls"
+spec:
+  secretName: "multi-k8s-frontend.quik-studio-com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: multi-k8s-frontend.quik-studio.com
+  dnsNames:
+    # May include www, need to figure out for subdomain
+    - multi-k8s-frontend.quik-studio.com
