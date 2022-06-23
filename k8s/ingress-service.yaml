@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - multi-k8s-frontend.quik-studio.com
-      secretName: "multi-k8s-frontend-quik-studio-com"
+      secretName: multi-k8s-frontend-quik-studio-com
   rules:
     # Duplicate the entire block for www, then change the host to www prefix
     - host: multi-k8s-frontend.quik-studio.com
